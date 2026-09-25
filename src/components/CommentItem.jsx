@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { postedAt } from '../utils'
 import { asyncDeleteComment, asyncEditComment } from '../states/threadDetail/action'
 import { useNotification } from '../context/NotificationContext'
+import parse from 'html-react-parser'
 
 function CommentItem({
   id,
@@ -187,7 +188,7 @@ function CommentItem({
             </div>
           </div>
         ) : (
-          <p className="comment-body-text">{content}</p>
+          <div className="comment-body-text">{parse(content)}</div>
         )}
 
         <div className="threads-action-bar comment-action-bar-small">

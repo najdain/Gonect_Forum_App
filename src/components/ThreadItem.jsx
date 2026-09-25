@@ -5,6 +5,7 @@ import { postedAt } from '../utils'
 import { asyncDeleteThread, asyncEditThread, asyncToggleRepostThread } from '../states/threads/action'
 import { toggleBookmarkActionCreator } from '../states/bookmarks/action'
 import { useNotification } from '../context/NotificationContext'
+import parse from 'html-react-parser'
 
 function ThreadItem({
   id,
@@ -268,8 +269,8 @@ function ThreadItem({
             <Link to={`/threads/${id}`} className="threads-body-link" id={`thread-title-${id}`}>
               {title && <h3 className="threads-post-title">{title}</h3>}
             </Link>
-            <p className="threads-post-text">
-              {displayedText}
+            <div className="threads-post-text">
+              {parse(displayedText)}
               {isLongText && (
                 <button
                   type="button"
@@ -283,7 +284,7 @@ function ThreadItem({
                   {isExpanded ? ' Sembunyikan' : ' Baca selengkapnya'}
                 </button>
               )}
-            </p>
+            </div>
 
             {imageUrl && (
               <Link to={`/threads/${id}`} className="threads-body-link">

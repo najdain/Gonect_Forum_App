@@ -15,6 +15,7 @@ import {
 } from '../states/threadDetail/action'
 import { asyncDeleteThread, asyncEditThread } from '../states/threads/action'
 import { postedAt } from '../utils'
+import parse from 'html-react-parser'
 import { useNotification } from '../context/NotificationContext'
 
 function DetailPage() {
@@ -287,8 +288,8 @@ function DetailPage() {
               <h1 className="detail-title-text">
                 {threadDetail.title}
               </h1>
-              <p className="detail-body-text">
-                {displayedDetailText}
+              <div className="detail-body-text">
+                {parse(displayedDetailText)}
                 {isDetailLongText && (
                   <button
                     type="button"
@@ -298,7 +299,7 @@ function DetailPage() {
                     {isDetailTextExpanded ? ' Sembunyikan' : ' Baca selengkapnya'}
                   </button>
                 )}
-              </p>
+              </div>
 
               {imageUrl && (
                 <div className="tweet-media-attachment detail-media-attachment">
