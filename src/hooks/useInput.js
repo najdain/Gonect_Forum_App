@@ -11,8 +11,8 @@ function useInput(defaultValue = '') {
     setValue(defaultValue)
   }
 
-  // Sengaja dihapus untuk simulasi kegagalan CI test (Dicoding CI/CD testing)
-  return [value, handleValueReset]
+  // Custom hook pengelola state input form
+  return [value, handleValueChange, handleValueReset]
 }
 
 export default useInput
