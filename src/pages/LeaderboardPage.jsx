@@ -10,6 +10,7 @@ function LeaderboardPage() {
   const dispatch = useDispatch()
   const { leaderboards = [], threads = [] } = useSelector((state) => state)
 
+  // Ambil data leaderboard & threads jika kosong
   useEffect(() => {
     if (threads.length === 0) {
       dispatch(asyncPopulateUsersAndThreads())
@@ -19,6 +20,7 @@ function LeaderboardPage() {
     }
   }, [dispatch, threads.length, leaderboards.length])
 
+  // Kategori unik dari threads
   const categories = Array.from(
     new Set(threads.map((t) => t.category).filter(Boolean))
   )
@@ -26,6 +28,7 @@ function LeaderboardPage() {
   return (
     <>
       <main className="middle-feed-column">
+        {/* Header halaman */}
         <div className="feed-sticky-header">
           <h1 className="feed-header-title">Leaderboard</h1>
         </div>
@@ -38,6 +41,7 @@ function LeaderboardPage() {
             </p>
           </div>
 
+          {/* Daftar peringkat pengguna */}
           <div className="leaderboard-list flex-col">
             {leaderboards.map(({ user, score }, index) => {
               const handleName = `@${user.name.toLowerCase().replace(/\s+/g, '')}`

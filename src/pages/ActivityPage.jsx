@@ -7,14 +7,17 @@ import { asyncPopulateUsersAndThreads } from '../states/shared/action'
 function ActivityPage() {
   const dispatch = useDispatch()
   const { threads = [] } = useSelector((state) => state)
+  // State filter notifikasi aktif
   const [activeFilter, setActiveFilter] = useState('all')
 
+  // Ambil data threads awal jika kosong
   useEffect(() => {
     if (threads.length === 0) {
       dispatch(asyncPopulateUsersAndThreads())
     }
   }, [dispatch, threads.length])
 
+  // Data tiruan notifikasi aktivitas
   const dummyNotifications = [
     {
       id: 1,
@@ -85,6 +88,7 @@ function ActivityPage() {
     }
   ]
 
+  // Filter notifikasi sesuai tab aktif
   const filteredNotifications = dummyNotifications.filter((notif) => {
     if (activeFilter === 'likes') return notif.type === 'like'
     if (activeFilter === 'replies') return notif.type === 'reply'
@@ -93,6 +97,7 @@ function ActivityPage() {
     return true
   })
 
+  // Kategori unik dari threads
   const categories = Array.from(
     new Set(threads.map((t) => t.category).filter(Boolean))
   )
@@ -100,10 +105,12 @@ function ActivityPage() {
   return (
     <>
       <main className="middle-feed-column">
+        {/* Header halaman */}
         <div className="feed-sticky-header">
           <h1 className="feed-header-title">Aktivitas & Notifikasi</h1>
         </div>
 
+        {/* Tab navigasi filter */}
         <div className="profile-pill-tabs-wrapper" style={{ padding: '12px 16px' }}>
           <button
             type="button"
@@ -142,6 +149,7 @@ function ActivityPage() {
           </button>
         </div>
 
+        {/* Daftar item notifikasi */}
         <div className="activity-list-wrapper">
           {filteredNotifications.map((notif) => (
             <div key={notif.id} className="activity-item-card">
@@ -165,6 +173,7 @@ function ActivityPage() {
         </div>
       </main>
 
+      {/* Sidebar kanan */}
       <RightSidebar categories={categories} />
     </>
   )

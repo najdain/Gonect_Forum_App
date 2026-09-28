@@ -13,6 +13,7 @@ function RegisterPage() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  // Handler submit registrasi akun
   async function handleSubmit(event) {
     event.preventDefault()
     try {
@@ -23,6 +24,7 @@ function RegisterPage() {
     }
   }
 
+  // Handler konfirmasi sukses registrasi
   function handleModalConfirm() {
     setIsSuccess(false)
     navigate('/login')

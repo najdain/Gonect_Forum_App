@@ -11,6 +11,7 @@ const ActionType = {
   TOGGLE_REPOST_THREAD: 'TOGGLE_REPOST_THREAD'
 }
 
+// Action simpan daftar utas
 function receiveThreadsActionCreator(threads) {
   return {
     type: ActionType.RECEIVE_THREADS,
@@ -20,6 +21,7 @@ function receiveThreadsActionCreator(threads) {
   }
 }
 
+// Action tambah utas baru
 function addThreadActionCreator(thread) {
   return {
     type: ActionType.ADD_THREAD,
@@ -29,6 +31,7 @@ function addThreadActionCreator(thread) {
   }
 }
 
+// Action perbarui vote utas
 function updateThreadVotesActionCreator({ threadId, upVotesBy, downVotesBy }) {
   return {
     type: ActionType.UPDATE_THREAD_VOTES,
@@ -40,6 +43,7 @@ function updateThreadVotesActionCreator({ threadId, upVotesBy, downVotesBy }) {
   }
 }
 
+// Action hapus utas
 function deleteThreadActionCreator(threadId) {
   return {
     type: ActionType.DELETE_THREAD,
@@ -49,6 +53,7 @@ function deleteThreadActionCreator(threadId) {
   }
 }
 
+// Action edit utas
 function editThreadActionCreator({ threadId, title, body, category }) {
   return {
     type: ActionType.EDIT_THREAD,
@@ -61,6 +66,7 @@ function editThreadActionCreator({ threadId, title, body, category }) {
   }
 }
 
+// Thunk buat utas baru
 function asyncAddThread({ title, body, category }) {
   return async (dispatch, getState) => {
     dispatch(showLoading())
@@ -81,6 +87,7 @@ function asyncAddThread({ title, body, category }) {
   }
 }
 
+// Thunk toggle upvote utas
 function asyncToggleUpvoteThread(threadId) {
   return async (dispatch, getState) => {
     const { authUser, threads } = getState()
@@ -132,6 +139,7 @@ function asyncToggleUpvoteThread(threadId) {
   }
 }
 
+// Thunk toggle downvote utas
 function asyncToggleDownvoteThread(threadId) {
   return async (dispatch, getState) => {
     const { authUser, threads } = getState()
@@ -183,6 +191,7 @@ function asyncToggleDownvoteThread(threadId) {
   }
 }
 
+// Action toggle repost utas
 function toggleRepostThreadActionCreator({ threadId, userId }) {
   return {
     type: ActionType.TOGGLE_REPOST_THREAD,
@@ -193,6 +202,7 @@ function toggleRepostThreadActionCreator({ threadId, userId }) {
   }
 }
 
+// Thunk toggle repost utas
 function asyncToggleRepostThread(threadId) {
   return async (dispatch, getState) => {
     const { authUser } = getState()
@@ -206,12 +216,14 @@ function asyncToggleRepostThread(threadId) {
   }
 }
 
+// Thunk hapus utas
 function asyncDeleteThread(threadId) {
   return async (dispatch) => {
     dispatch(deleteThreadActionCreator(threadId))
   }
 }
 
+// Thunk edit utas
 function asyncEditThread({ threadId, title, body, category }) {
   return async (dispatch) => {
     dispatch(editThreadActionCreator({ threadId, title, body, category }))

@@ -32,6 +32,7 @@ function CommentItem({
   const isOwner = authUser && owner && authUser.id === owner.id
   const handleName = owner?.name ? `@${owner.name.toLowerCase().replace(/\s+/g, '')}` : '@anonymous'
 
+  // Handler upvote komentar
   function handleUpvote() {
     if (!authUser) {
       if (showToast) showToast('Anda harus login terlebih dahulu untuk memberikan suara.', 'warning')
@@ -40,6 +41,7 @@ function CommentItem({
     upvote(id)
   }
 
+  // Handler downvote komentar
   function handleDownvote() {
     if (!authUser) {
       if (showToast) showToast('Anda harus login terlebih dahulu untuk memberikan suara.', 'warning')
@@ -48,6 +50,7 @@ function CommentItem({
     downvote(id)
   }
 
+  // Handler hapus komentar
   function handleDelete() {
     if (showConfirm) {
       showConfirm({
@@ -63,12 +66,14 @@ function CommentItem({
     }
   }
 
+  // Handler simpan edit komentar
   function handleSaveEdit() {
     if (!editContent.trim()) return
     dispatch(asyncEditComment({ commentId: id, content: editContent }))
     setIsEditing(false)
   }
 
+  // Handler toggle form balas komentar
   function handleToggleReply() {
     if (!authUser) {
       if (showToast) showToast('Anda harus login terlebih dahulu untuk membalas komentar.', 'warning')
@@ -80,6 +85,7 @@ function CommentItem({
     setShowReplyInput(!showReplyInput)
   }
 
+  // Handler kirim pesan balasan
   function handleSendReply() {
     if (!replyText.trim()) return
     if (addComment) {

@@ -7,6 +7,7 @@ const ActionType = {
   UPDATE_AUTH_USER: 'UPDATE_AUTH_USER'
 }
 
+// Action creator simpan user login
 function setAuthUserActionCreator(authUser) {
   return {
     type: ActionType.SET_AUTH_USER,
@@ -16,6 +17,7 @@ function setAuthUserActionCreator(authUser) {
   }
 }
 
+// Action creator perbarui data user
 function updateAuthUserActionCreator(updatedData) {
   return {
     type: ActionType.UPDATE_AUTH_USER,
@@ -25,12 +27,14 @@ function updateAuthUserActionCreator(updatedData) {
   }
 }
 
+// Action creator hapus user login
 function unsetAuthUserActionCreator() {
   return {
     type: ActionType.UNSET_AUTH_USER
   }
 }
 
+// Thunk proses login user
 function asyncSetAuthUser({ email, password }) {
   return async (dispatch) => {
     dispatch(showLoading())
@@ -59,6 +63,7 @@ function asyncSetAuthUser({ email, password }) {
   }
 }
 
+// Thunk proses logout user
 function asyncUnsetAuthUser() {
   return (dispatch) => {
     dispatch(unsetAuthUserActionCreator())

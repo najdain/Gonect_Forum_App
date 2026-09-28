@@ -20,6 +20,7 @@ export function NotificationProvider({ children }) {
     featureName: ''
   })
 
+  // Tampilkan notifikasi toast
   const showToast = useCallback((message, type = 'info') => {
     setToast({ visible: true, message, type })
     setTimeout(() => {
@@ -27,10 +28,12 @@ export function NotificationProvider({ children }) {
     }, 3500)
   }, [])
 
+  // Sembunyikan notifikasi toast
   const hideToast = useCallback(() => {
     setToast((prev) => ({ ...prev, visible: false }))
   }, [])
 
+  // Tampilkan dialog konfirmasi
   const showConfirm = useCallback(({ title, message, confirmText = 'Ya, Lanjutkan', cancelText = 'Batal', isDanger = false, onConfirm }) => {
     setConfirmModal({
       isOpen: true,
@@ -43,10 +46,12 @@ export function NotificationProvider({ children }) {
     })
   }, [])
 
+  // Tutup dialog konfirmasi
   const closeConfirm = useCallback(() => {
     setConfirmModal((prev) => ({ ...prev, isOpen: false, onConfirm: null }))
   }, [])
 
+  // Jalankan aksi konfirmasi
   const handleConfirmAction = useCallback(() => {
     if (confirmModal.onConfirm) {
       confirmModal.onConfirm()
@@ -54,11 +59,13 @@ export function NotificationProvider({ children }) {
     closeConfirm()
   }, [confirmModal, closeConfirm])
 
+  // Tampilkan modal ajakan login
   const showAuthModal = useCallback((featureName = 'fitur ini') => {
     showToast(`Silakan masuk ke akun Anda terlebih dahulu untuk mengakses ${featureName}`, 'warning')
     setAuthModal({ isOpen: true, featureName })
   }, [showToast])
 
+  // Tutup modal ajakan login
   const closeAuthModal = useCallback(() => {
     setAuthModal({ isOpen: false, featureName: '' })
   }, [])

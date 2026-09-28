@@ -6,6 +6,7 @@ const ActionType = {
   SET_IS_PRELOAD: 'SET_IS_PRELOAD'
 }
 
+// Action perbarui status preload aplikasi
 function setIsPreloadActionCreator(isPreload) {
   return {
     type: ActionType.SET_IS_PRELOAD,
@@ -15,6 +16,7 @@ function setIsPreloadActionCreator(isPreload) {
   }
 }
 
+// Thunk cek sesi login awal
 function asyncPreloadProcess() {
   return async (dispatch) => {
     dispatch(showLoading())

@@ -1,5 +1,6 @@
 import { ActionType } from './action'
 
+// Ambil bookmark dari localStorage
 function getInitialBookmarks() {
   try {
     const saved = localStorage.getItem('gonect_bookmarks')
@@ -9,8 +10,10 @@ function getInitialBookmarks() {
   }
 }
 
+// Reducer daftar bookmark
 function bookmarksReducer(state = getInitialBookmarks(), action = {}) {
   switch (action.type) {
+    // Toggle bookmark dan sinkron ke localStorage
     case ActionType.TOGGLE_BOOKMARK: {
       const { threadId } = action.payload
       const exists = state.includes(threadId)

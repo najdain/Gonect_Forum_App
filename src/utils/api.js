@@ -1,14 +1,17 @@
 const api = (() => {
   const BASE_URL = 'https://forum-api.dicoding.dev/v1'
 
+  // Simpan token akses ke localStorage
   function putAccessToken(token) {
     localStorage.setItem('accessToken', token)
   }
 
+  // Ambil token akses dari localStorage
   function getAccessToken() {
     return localStorage.getItem('accessToken')
   }
 
+  // Fetch dengan token autentikasi
   async function _fetchWithAuth(url, options = {}) {
     return fetch(url, {
       ...options,
@@ -19,6 +22,7 @@ const api = (() => {
     })
   }
 
+  // Registrasi user baru
   async function register({ name, email, password }) {
     const response = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
@@ -39,6 +43,7 @@ const api = (() => {
     return user
   }
 
+  // Login user
   async function login({ email, password }) {
     const response = await fetch(`${BASE_URL}/login`, {
       method: 'POST',
@@ -59,6 +64,7 @@ const api = (() => {
     return token
   }
 
+  // Ambil profil user login
   async function getOwnProfile() {
     const response = await _fetchWithAuth(`${BASE_URL}/users/me`)
 
@@ -73,6 +79,7 @@ const api = (() => {
     return user
   }
 
+  // Ambil semua user
   async function getAllUsers() {
     const response = await fetch(`${BASE_URL}/users`)
 
@@ -87,6 +94,7 @@ const api = (() => {
     return users
   }
 
+  // Buat utas baru
   async function createThread({ title, body, category = '' }) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads`, {
       method: 'POST',
@@ -107,6 +115,7 @@ const api = (() => {
     return thread
   }
 
+  // Ambil semua utas
   async function getAllThreads() {
     const response = await fetch(`${BASE_URL}/threads`)
 
@@ -121,6 +130,7 @@ const api = (() => {
     return threads
   }
 
+  // Ambil detail utas
   async function getThreadDetail(id) {
     const response = await fetch(`${BASE_URL}/threads/${id}`)
 
@@ -135,6 +145,7 @@ const api = (() => {
     return detailThread
   }
 
+  // Tambah komentar baru
   async function createComment({ threadId, content }) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments`, {
       method: 'POST',
@@ -155,6 +166,7 @@ const api = (() => {
     return comment
   }
 
+  // Beri upvote pada utas
   async function upVoteThread(threadId) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/up-vote`, {
       method: 'POST'
@@ -171,6 +183,7 @@ const api = (() => {
     return vote
   }
 
+  // Beri downvote pada utas
   async function downVoteThread(threadId) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/down-vote`, {
       method: 'POST'
@@ -187,6 +200,7 @@ const api = (() => {
     return vote
   }
 
+  // Netralkan vote pada utas
   async function neutralizeThreadVote(threadId) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/neutral-vote`, {
       method: 'POST'
@@ -203,6 +217,7 @@ const api = (() => {
     return vote
   }
 
+  // Beri upvote pada komentar
   async function upVoteComment({ threadId, commentId }) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/up-vote`, {
       method: 'POST'
@@ -219,6 +234,7 @@ const api = (() => {
     return vote
   }
 
+  // Beri downvote pada komentar
   async function downVoteComment({ threadId, commentId }) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/down-vote`, {
       method: 'POST'
@@ -235,6 +251,7 @@ const api = (() => {
     return vote
   }
 
+  // Netralkan vote pada komentar
   async function neutralizeCommentVote({ threadId, commentId }) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/neutral-vote`, {
       method: 'POST'
@@ -251,6 +268,7 @@ const api = (() => {
     return vote
   }
 
+  // Ambil data klasemen (leaderboard)
   async function getLeaderboards() {
     const response = await fetch(`${BASE_URL}/leaderboards`)
 

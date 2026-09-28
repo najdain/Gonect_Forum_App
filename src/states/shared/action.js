@@ -4,6 +4,7 @@ import { receiveThreadsActionCreator } from '../threads/action'
 import { receiveLeaderboardsActionCreator } from '../leaderboards/action'
 import { showLoading, hideLoading } from '../loadingBar/action'
 
+// Thunk ambil data pengguna, utas, dan klasemen
 function asyncPopulateUsersAndThreads() {
   return async (dispatch) => {
     dispatch(showLoading())

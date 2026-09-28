@@ -45,6 +45,7 @@ function DetailPage() {
     return () => window.removeEventListener('click', handleClickOutside)
   }, [showDropdown])
 
+  // Simpan utas ke bookmark
   function handleBookmarkThread() {
     if (!authUser) {
       if (showToast) showToast('Anda harus login terlebih dahulu untuk menyimpan utas.', 'warning')
@@ -57,10 +58,12 @@ function DetailPage() {
     }
   }
 
+  // Fetch detail utas berdasarkan ID
   useEffect(() => {
     dispatch(asyncGetThreadDetail(id))
   }, [id, dispatch])
 
+  // Set nilai form saat data utas dimuat
   useEffect(() => {
     if (threadDetail) {
       setEditTitle(threadDetail.title || '')
@@ -69,26 +72,32 @@ function DetailPage() {
     }
   }, [threadDetail])
 
+  // Handler upvote utas
   function handleUpvoteThread() {
     dispatch(asyncToggleUpvoteDetailThread())
   }
 
+  // Handler downvote utas
   function handleDownvoteThread() {
     dispatch(asyncToggleDownvoteDetailThread())
   }
 
+  // Handler tambah komentar
   function handleAddComment(content) {
     dispatch(asyncCreateComment({ threadId: id, content }))
   }
 
+  // Handler upvote komentar
   function handleUpvoteComment(commentId) {
     dispatch(asyncToggleUpvoteComment(commentId))
   }
 
+  // Handler downvote komentar
   function handleDownvoteComment(commentId) {
     dispatch(asyncToggleDownvoteComment(commentId))
   }
 
+  // Handler hapus utas
   function handleDeleteThread() {
     if (showConfirm) {
       showConfirm({
@@ -108,6 +117,7 @@ function DetailPage() {
     }
   }
 
+  // Handler simpan perubahan utas
   function handleSaveEditThread() {
     if (!editTitle.trim() || !editBody.trim()) return
     dispatch(asyncEditThreadDetail({ title: editTitle, body: editBody, category: editCategory }))
