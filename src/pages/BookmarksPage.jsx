@@ -9,12 +9,14 @@ function BookmarksPage() {
   const dispatch = useDispatch()
   const { threads = [], users = [], authUser = null, bookmarks = [] } = useSelector((state) => state)
 
+  // Ambil data threads & users jika belum ada
   useEffect(() => {
     if (threads.length === 0 || users.length === 0) {
       dispatch(asyncPopulateUsersAndThreads())
     }
   }, [dispatch, threads.length, users.length])
 
+  // Filter utas yang disimpan ke bookmark
   const bookmarkedThreads = threads
     .filter((thread) => bookmarks.includes(thread.id))
     .map((thread) => ({
@@ -22,14 +24,17 @@ function BookmarksPage() {
       user: users.find((u) => u.id === thread.ownerId) || thread.user
     }))
 
+  // Handler upvote utas
   function handleUpvote(id) {
     dispatch(asyncToggleUpvoteThread(id))
   }
 
+  // Handler downvote utas
   function handleDownvote(id) {
     dispatch(asyncToggleDownvoteThread(id))
   }
 
+  // Kategori unik dari threads
   const categories = Array.from(
     new Set(threads.map((t) => t.category).filter(Boolean))
   )

@@ -38,6 +38,7 @@ function ThreadItem({
   const bookmarks = useSelector((state) => state.bookmarks || [])
   const isBookmarked = bookmarks.includes(id)
 
+  // Handler upvote utas
   function handleUpvote(e) {
     e.preventDefault()
     e.stopPropagation()
@@ -49,6 +50,7 @@ function ThreadItem({
     upvote(id)
   }
 
+  // Handler downvote utas
   function handleDownvote(e) {
     e.preventDefault()
     e.stopPropagation()
@@ -60,6 +62,7 @@ function ThreadItem({
     downvote(id)
   }
 
+  // Handler repost utas
   function handleRepost(e) {
     e.preventDefault()
     e.stopPropagation()
@@ -71,6 +74,7 @@ function ThreadItem({
     dispatch(asyncToggleRepostThread(id))
   }
 
+  // Handler bookmark utas
   function handleBookmark(e) {
     e.preventDefault()
     e.stopPropagation()
@@ -85,6 +89,7 @@ function ThreadItem({
     }
   }
 
+  // Handler hapus utas
   function handleDelete(e) {
     e.preventDefault()
     e.stopPropagation()
@@ -102,6 +107,7 @@ function ThreadItem({
     }
   }
 
+  // Handler simpan edit utas
   function handleSaveEdit(e) {
     e.preventDefault()
     e.stopPropagation()

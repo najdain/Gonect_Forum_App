@@ -11,6 +11,7 @@ function useInput(defaultValue = '') {
     setValue(defaultValue)
   }
 
+  // Custom hook pengelola state input form
   return [value, handleValueChange, handleValueReset]
 }
 

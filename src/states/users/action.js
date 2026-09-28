@@ -6,6 +6,7 @@ const ActionType = {
   UPDATE_USER: 'UPDATE_USER'
 }
 
+// Action simpan daftar pengguna
 function receiveUsersActionCreator(users) {
   return {
     type: ActionType.RECEIVE_USERS,
@@ -15,6 +16,7 @@ function receiveUsersActionCreator(users) {
   }
 }
 
+// Action perbarui data pengguna
 function updateUserActionCreator(user) {
   return {
     type: ActionType.UPDATE_USER,
@@ -24,6 +26,7 @@ function updateUserActionCreator(user) {
   }
 }
 
+// Thunk registrasi akun baru
 function asyncRegisterUser({ name, email, password }) {
   return async (dispatch) => {
     dispatch(showLoading())

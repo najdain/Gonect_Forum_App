@@ -21,6 +21,7 @@ function ProfilePage() {
   const [isFollowing, setIsFollowing] = useState(false)
   const [isEditingProfile, setIsEditingProfile] = useState(false)
 
+  // Ambil data threads, users, dan leaderboards
   useEffect(() => {
     if (threads.length === 0 || users.length === 0) {
       dispatch(asyncPopulateUsersAndThreads())
@@ -70,6 +71,8 @@ function ProfilePage() {
   const handleName = profileUser.name ? `@${profileUser.name.toLowerCase().replace(/\s+/g, '')}` : '@anonymous'
 
   const leaderboardEntry = leaderboards.find((item) => item.user?.id === targetId)
+
+  // Filter daftar utas berdasarkan pemilik dan interaksi
   const userThreads = threads.filter((t) => {
     if (t.ownerId) return t.ownerId === profileUser.id
     if (t.user && t.user.id) return t.user.id === profileUser.id
@@ -93,14 +96,17 @@ function ProfilePage() {
     new Set(threads.map((t) => t.category).filter(Boolean))
   )
 
+  // Handler upvote utas
   function handleUpvote(threadId) {
     dispatch(asyncToggleUpvoteThread(threadId))
   }
 
+  // Handler downvote utas
   function handleDownvote(threadId) {
     dispatch(asyncToggleDownvoteThread(threadId))
   }
 
+  // Handler unggah avatar profil
   function handleAvatarFileUpload(e) {
     const file = e.target.files[0]
     if (!file) return
@@ -112,6 +118,7 @@ function ProfilePage() {
     reader.readAsDataURL(file)
   }
 
+  // Handler simpan perubahan profil
   function handleSaveProfile(e) {
     e.preventDefault()
     if (!editName.trim()) return

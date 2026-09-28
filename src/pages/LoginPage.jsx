@@ -8,6 +8,7 @@ function LoginPage() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  // Handler submit login pengguna
   async function onLogin({ email, password }) {
     try {
       await dispatch(asyncSetAuthUser({ email, password }))

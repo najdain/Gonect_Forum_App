@@ -10,6 +10,7 @@ function SearchUsersPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const { users = [], leaderboards = [], threads = [] } = useSelector((state) => state)
 
+  // Ambil data awal users, threads, dan leaderboards
   useEffect(() => {
     if (threads.length === 0 || users.length === 0) {
       dispatch(asyncPopulateUsersAndThreads())
@@ -19,6 +20,7 @@ function SearchUsersPage() {
     }
   }, [dispatch, threads.length, users.length, leaderboards.length])
 
+  // Gabungkan profil pengguna unik
   const allUsers = useMemo(() => {
     const userMap = new Map()
 
@@ -36,6 +38,7 @@ function SearchUsersPage() {
     return Array.from(userMap.values())
   }, [users, leaderboards])
 
+  // Petakan skor leaderboard pengguna
   const leaderboardScoreMap = useMemo(() => {
     const map = new Map()
     leaderboards.forEach((item) => {
@@ -48,6 +51,7 @@ function SearchUsersPage() {
 
   const [visibleCount, setVisibleCount] = useState(50)
 
+  // Filter daftar pengguna berdasarkan query
   const filteredUsers = useMemo(() => {
     const queryLower = searchQuery.trim().toLowerCase()
     if (!queryLower) return allUsers

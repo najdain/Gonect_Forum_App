@@ -12,6 +12,7 @@ const ActionType = {
   EDIT_THREAD_DETAIL: 'EDIT_THREAD_DETAIL'
 }
 
+// Action simpan detail utas
 function receiveThreadDetailActionCreator(detailThread) {
   return {
     type: ActionType.RECEIVE_THREAD_DETAIL,
@@ -21,12 +22,14 @@ function receiveThreadDetailActionCreator(detailThread) {
   }
 }
 
+// Action kosongkan detail utas
 function clearThreadDetailActionCreator() {
   return {
     type: ActionType.CLEAR_THREAD_DETAIL
   }
 }
 
+// Action tambah komentar baru
 function addCommentActionCreator(comment) {
   return {
     type: ActionType.ADD_COMMENT,
@@ -36,6 +39,7 @@ function addCommentActionCreator(comment) {
   }
 }
 
+// Action perbarui vote detail utas
 function updateDetailThreadVotesActionCreator({ upVotesBy, downVotesBy }) {
   return {
     type: ActionType.UPDATE_DETAIL_THREAD_VOTES,
@@ -46,6 +50,7 @@ function updateDetailThreadVotesActionCreator({ upVotesBy, downVotesBy }) {
   }
 }
 
+// Action perbarui vote komentar
 function updateCommentVotesActionCreator({ commentId, upVotesBy, downVotesBy }) {
   return {
     type: ActionType.UPDATE_COMMENT_VOTES,
@@ -57,6 +62,7 @@ function updateCommentVotesActionCreator({ commentId, upVotesBy, downVotesBy }) 
   }
 }
 
+// Action hapus komentar
 function deleteCommentActionCreator(commentId) {
   return {
     type: ActionType.DELETE_COMMENT,
@@ -66,6 +72,7 @@ function deleteCommentActionCreator(commentId) {
   }
 }
 
+// Action edit isi komentar
 function editCommentActionCreator({ commentId, content }) {
   return {
     type: ActionType.EDIT_COMMENT,
@@ -76,6 +83,7 @@ function editCommentActionCreator({ commentId, content }) {
   }
 }
 
+// Action edit detail utas
 function editThreadDetailActionCreator({ title, body, category }) {
   return {
     type: ActionType.EDIT_THREAD_DETAIL,
@@ -87,24 +95,28 @@ function editThreadDetailActionCreator({ title, body, category }) {
   }
 }
 
+// Thunk hapus komentar
 function asyncDeleteComment(commentId) {
   return async (dispatch) => {
     dispatch(deleteCommentActionCreator(commentId))
   }
 }
 
+// Thunk edit komentar
 function asyncEditComment({ commentId, content }) {
   return async (dispatch) => {
     dispatch(editCommentActionCreator({ commentId, content }))
   }
 }
 
+// Thunk edit detail utas
 function asyncEditThreadDetail({ title, body, category }) {
   return async (dispatch) => {
     dispatch(editThreadDetailActionCreator({ title, body, category }))
   }
 }
 
+// Thunk ambil detail utas dari API
 function asyncGetThreadDetail(threadId) {
   return async (dispatch) => {
     dispatch(showLoading())
@@ -121,6 +133,7 @@ function asyncGetThreadDetail(threadId) {
   }
 }
 
+// Thunk kirim komentar baru
 function asyncCreateComment({ threadId, content }) {
   return async (dispatch) => {
     dispatch(showLoading())
@@ -137,6 +150,7 @@ function asyncCreateComment({ threadId, content }) {
   }
 }
 
+// Thunk toggle upvote detail utas
 function asyncToggleUpvoteDetailThread() {
   return async (dispatch, getState) => {
     const { authUser, threadDetail } = getState()
@@ -179,6 +193,7 @@ function asyncToggleUpvoteDetailThread() {
   }
 }
 
+// Thunk toggle downvote detail utas
 function asyncToggleDownvoteDetailThread() {
   return async (dispatch, getState) => {
     const { authUser, threadDetail } = getState()
@@ -221,6 +236,7 @@ function asyncToggleDownvoteDetailThread() {
   }
 }
 
+// Thunk toggle upvote komentar
 function asyncToggleUpvoteComment(commentId) {
   return async (dispatch, getState) => {
     const { authUser, threadDetail } = getState()
@@ -264,6 +280,7 @@ function asyncToggleUpvoteComment(commentId) {
   }
 }
 
+// Thunk toggle downvote komentar
 function asyncToggleDownvoteComment(commentId) {
   return async (dispatch, getState) => {
     const { authUser, threadDetail } = getState()

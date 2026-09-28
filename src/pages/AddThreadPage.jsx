@@ -18,12 +18,14 @@ function AddThreadPage() {
   const [image, setImage] = useState('')
   const [isCompressing, setIsCompressing] = useState(false)
 
+  // Proteksi halaman hanya untuk user login
   useEffect(() => {
     if (!authUser) {
       navigate('/login')
     }
   }, [authUser, navigate])
 
+  // Handler kompresi dan upload gambar
   function handleImageChange(event) {
     const file = event.target.files[0]
     if (!file) return
@@ -70,10 +72,12 @@ function AddThreadPage() {
     reader.readAsDataURL(file)
   }
 
+  // Handler hapus gambar
   function handleRemoveImage() {
     setImage('')
   }
 
+  // Handler publikasi utas baru
   async function handleSubmit(event) {
     event.preventDefault()
     if (!title.trim() || !body.trim() || isCompressing) return

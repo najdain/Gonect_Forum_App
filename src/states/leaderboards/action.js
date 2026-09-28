@@ -6,6 +6,7 @@ const ActionType = {
   INCREMENT_USER_SCORE: 'INCREMENT_USER_SCORE'
 }
 
+// Action simpan data leaderboard
 function receiveLeaderboardsActionCreator(leaderboards) {
   return {
     type: ActionType.RECEIVE_LEADERBOARDS,
@@ -15,6 +16,7 @@ function receiveLeaderboardsActionCreator(leaderboards) {
   }
 }
 
+// Action tambah skor pengguna
 function incrementUserScoreActionCreator({ user, points = 10 }) {
   return {
     type: ActionType.INCREMENT_USER_SCORE,
@@ -25,6 +27,7 @@ function incrementUserScoreActionCreator({ user, points = 10 }) {
   }
 }
 
+// Thunk ambil data leaderboard
 function asyncReceiveLeaderboards() {
   return async (dispatch) => {
     dispatch(showLoading())

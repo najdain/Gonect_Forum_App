@@ -7,12 +7,14 @@ function MessagesPage() {
   const dispatch = useDispatch()
   const { threads = [] } = useSelector((state) => state)
 
+  // Ambil data threads jika kosong
   useEffect(() => {
     if (threads.length === 0) {
       dispatch(asyncPopulateUsersAndThreads())
     }
   }, [dispatch, threads.length])
 
+  // Data tiruan percakapan pesan
   const initialChats = [
     {
       id: 'maria',
@@ -70,6 +72,7 @@ function MessagesPage() {
 
   const activeChat = chats.find((c) => c.id === activeChatId) || chats[0]
 
+  // Handler kirim pesan obrolan
   function handleSendMessage(e) {
     e.preventDefault()
     if (!inputText.trim()) return
@@ -101,6 +104,7 @@ function MessagesPage() {
     setInputText('')
   }
 
+  // Kategori unik dari threads
   const categories = Array.from(
     new Set(threads.map((t) => t.category).filter(Boolean))
   )
